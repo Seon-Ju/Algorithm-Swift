@@ -1,22 +1,10 @@
 let n = Int(String(readLine()!))!
 var dict = [String: Int]()
-var best = [String]()
-var max = 0
 
 for _ in 0..<n {
   let book = readLine()!
-  if dict[book] != nil {
-    dict[book]! += 1
-  } else {
-    dict.updateValue(1, forKey: book)
-  }
-  
-  if dict[book]! > max {
-    max = dict[book]!
-    best = [book]
-  } else if dict[book]! == max {
-    best.append(book)
-  }
+  dict[book] = (dict[book] ?? 0) + 1
 }
 
-print(best.sorted()[0])
+let ans = dict.sorted { $0.value == $1.value ? $0.key < $1.key : $0.value > $1.value }
+print(ans.first!.key)
